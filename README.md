@@ -26,6 +26,10 @@ SECRET=SEIRocks!
 6. `git push heroku master`
 7. `heroku open`
 
+## Deployed Example
+
+[Mern Stack Puppies App](https://agile-peak-12945.herokuapp.com/)
+
 ## Available Scripts
 
 In the project directory, you can run:

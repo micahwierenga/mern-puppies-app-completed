@@ -64,7 +64,7 @@ class App extends Component {
               <>
                 HI, {userService.getUser().name.toUpperCase()}
                 &nbsp;&nbsp;&nbsp;
-                <NavLink exact to='/' onClick={this.handleLogout}>LOGOUT</NavLink>
+                <NavLink exact to='/logout' onClick={this.handleLogout}>LOGOUT</NavLink>
                 &nbsp;&nbsp;&nbsp;
                 <NavLink exact to='/'>PUPPIES LIST</NavLink>
                 &nbsp;&nbsp;&nbsp;

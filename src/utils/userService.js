@@ -1,9 +1,9 @@
 import tokenService from './tokenService';
 
-const BASE_URL = '/api/users/';
+const BASE_URL = '/api/users';
 
 function signup(user) {
-  return fetch(BASE_URL + 'signup', {
+  return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
@@ -28,7 +28,7 @@ function logout() {
 }
 
 function login(creds) {
-  return fetch(BASE_URL + 'login', {
+  return fetch(`${BASE_URL}/login`, {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(creds)

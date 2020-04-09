@@ -6,14 +6,14 @@ module.exports = {
     show,
     update,
     delete: deleteOne,
-    indexByUser
+    indexAll
 };
 
 // index
 
 async function index(req, res) {
     try{
-        const puppies = await Puppy.find({}).populate('user');
+        const puppies = await Puppy.find({user: req.params.userId}).populate('user');
         res.status(200).json(puppies);
     }
     catch(err){
@@ -25,8 +25,9 @@ async function index(req, res) {
 
 async function create(req, res) {
     try{
-        const puppy = await Puppy.create(req.body);
-        res.status(201).json(puppy);
+        await Puppy.create(req.body);
+        const puppies = await Puppy.find({user: req.body.user}).populate('user');
+        res.status(201).json(puppies);
     }
     catch(err){
         res.status(500).json(err);
@@ -49,8 +50,9 @@ async function show(req, res) {
 
 async function update(req, res) {
     try{
-        const updatedPuppy = await Puppy.findByIdAndUpdate(req.params.id, req.body, {new: true});
-        res.status(200).json(updatedPuppy);
+        await Puppy.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const puppies = await Puppy.find({user: req.body.user}).populate('user');
+        res.status(200).json(puppies);
     }
     catch(err){
         res.status(500).json(err);
@@ -71,9 +73,9 @@ async function deleteOne(req, res) {
 
 // indexByUser
 
-async function indexByUser(req, res) {
+async function indexAll(req, res) {
     try{
-        const puppiesByUser = await Puppy.find({user: req.params.userId}).populate('user');
+        const puppiesByUser = await Puppy.find({}).populate('user');
         res.status(200).json(puppiesByUser);
     }
     catch(err){

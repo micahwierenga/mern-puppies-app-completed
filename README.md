@@ -1,5 +1,31 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup
+
+1. `git clone https://github.com/micahwierenga/mern-puppies-app-completed`
+2. `cd mern-puppies-app-completed`
+3. `npm i`
+4. `touch .env`
+5. In `.env` (the `SECRET` can be whatever you'd like):
+
+```
+DATABASE_URL=INSERT_YOUR_DATABASE_STRING
+SECRET=SEIRocks!
+```
+
+6. In one terminal: `nodemon server.js`
+7. In another terminal: `npm start`
+
+## Heroku Deploy
+
+1. `heroku create` (include optional customized app name)
+2. `heroku config:set DATABASE_URL=INSERT_YOUR_DATABASE_STRING`
+3. `heroku config:set SECRET=SEIRocks!`
+4. `git add .`
+5. `git commit -m "Prepare for Heroku deployment"`
+6. `git push heroku master`
+7. `heroku open`
+
 ## Available Scripts
 
 In the project directory, you can run:

@@ -21,16 +21,16 @@ class App extends Component {
   }
 
   handleSignupOrLogin = () => {
-    this.setState({user: userService.getUser()});
+    this.setState({
+      user: userService.getUser()
+    }, () => {
+      this.getAllPuppies();
+    });
   }
 
   handleAddPuppy = async newPupData => {
-    const createNewPupAndGetAllPuppies = await puppyAPI.create(newPupData);
-    this.setState(state => ({
-      puppies: createNewPupAndGetAllPuppies
-    }), () => {
-      this.props.history.push('/')
-    });
+    await puppyAPI.create(newPupData);
+    this.getAllPuppies();
   }
 
   handleDeletePuppy= async id => {
@@ -41,18 +41,17 @@ class App extends Component {
   }
 
   handleUpdatePuppy = async updatedPupData => {
-    const updatedPuppyAndGetAllPuppies = await puppyAPI.update(updatedPupData);
-    this.setState({
-      puppies: updatedPuppyAndGetAllPuppies
-    },
-      // Using cb to wait for state to update before rerouting
-      () => this.props.history.push('/')
-    );
+    await puppyAPI.update(updatedPupData);
+    this.getAllPuppies();
+  }
+
+  getAllPuppies = async () => {
+    const puppies = await puppyAPI.getAll();
+    this.setState({puppies}, () => this.props.history.push('/'));
   }
 
   async componentDidMount() {
-    const puppies = await puppyAPI.getAll();
-    this.setState({puppies});
+    this.getAllPuppies();
   }
 
   render() {

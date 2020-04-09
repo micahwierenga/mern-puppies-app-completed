@@ -15,9 +15,11 @@ class EditPuppyPage extends Component {
   };
 
   handleChange = e => {
-    const formData = {...this.state.formData, [e.target.name]: e.target.value};
     this.setState({
-      formData,
+      formData: {
+        ...this.state.formData,
+        [e.target.name]: e.target.value
+      },
       invalidForm: !this.formRef.current.checkValidity()
     });
   };

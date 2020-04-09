@@ -13,8 +13,9 @@ DATABASE_URL=INSERT_YOUR_DATABASE_STRING
 SECRET=SEIRocks!
 ```
 
-6. In one terminal: `nodemon server.js`
-7. In another terminal: `npm start`
+6. `npm run build`
+7. In one terminal: `nodemon server.js`
+8. In another terminal: `npm start`
 
 ## Heroku Deploy
 

@@ -53,6 +53,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    this.getAllPuppies();
     const breeds = await dogAPI.getAllBreeds();
     this.setState({
       breeds

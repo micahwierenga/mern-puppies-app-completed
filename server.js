@@ -18,8 +18,9 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // API routes
 
-app.use('/api/puppies', puppiesRoutes);
 app.use('/api/users', usersRoutes);
+app.use(require('./config/auth'));
+app.use('/api/puppies', puppiesRoutes);
 
 // Catch all
 app.get('/*', (req, res) => {

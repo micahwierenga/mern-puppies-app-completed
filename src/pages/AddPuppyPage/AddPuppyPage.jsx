@@ -45,7 +45,7 @@ class AddPuppyPage extends Component {
             <label>Pup's Breed (required)</label>
             <select className="form-control" name="breed" value={this.state.formData.breed} onChange={this.handleChange}>
               <option>Choose a Breed</option>
-              {this.props.breeds.map((breed, idx) => <option value={breed.name}>{breed.name}</option>)}
+              {this.props.breeds.map((breed, idx) => <option key={breed.id} value={breed.name}>{breed.name}</option>)}
             </select>
           </div>
           <div className="form-group">

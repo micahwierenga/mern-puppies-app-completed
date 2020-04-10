@@ -6,7 +6,7 @@ import AddPuppyPage from '../AddPuppyPage/AddPuppyPage';
 import EditPuppyPage from '../EditPuppyPage/EditPuppyPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import * as puppyAPI from '../../utils/puppiesService';
+import * as puppyService from '../../utils/puppiesService';
 import * as dogAPI from '../../utils/dogApi';
 import userService from '../../utils/userService';
 
@@ -31,25 +31,27 @@ class App extends Component {
   }
 
   handleAddPuppy = async newPupData => {
-    await puppyAPI.create(newPupData);
+    await puppyService.create(newPupData);
     this.getAllPuppies();
   }
 
   handleDeletePuppy= async id => {
-    await puppyAPI.deleteOne(id);
+    await puppyService.deleteOne(id);
     this.setState(state => ({
       puppies: state.puppies.filter(p => p._id !== id)
     }), () => this.props.history.push('/'));
   }
 
   handleUpdatePuppy = async updatedPupData => {
-    await puppyAPI.update(updatedPupData);
+    await puppyService.update(updatedPupData);
     this.getAllPuppies();
   }
 
   getAllPuppies = async () => {
-    const puppies = await puppyAPI.getAll();
-    this.setState({puppies}, () => this.props.history.push('/'));
+    const puppies = await puppyService.getAll();
+    this.setState({
+      puppies
+    }, () => this.props.history.push('/'));
   }
 
   async componentDidMount() {

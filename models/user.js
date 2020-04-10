@@ -15,7 +15,10 @@ const userSchema = new Schema({
       unique: true,
       lowercase: true
   },
-  password: String
+  password: {
+    type: String,
+    required: true
+  }
 }, {
   timestamps: true
 });
@@ -23,6 +26,7 @@ const userSchema = new Schema({
 
 userSchema.set('toJSON', {
   transform: function(doc, ret) {
+    console.log('RET================:', ret)
     // remove the password property when serializing doc to JSON
     delete ret.password;
     return ret;
@@ -36,6 +40,7 @@ userSchema.pre('save', function(next) {
   // password has been changed - salt and hash it
   bcrypt.hash(user.password, SALT_ROUNDS, function(err, hash) {
     if (err) return next(err);
+    console.log('HASHEESH===============:', hash)
     // replace the user provided password with the hash
     user.password = hash;
     next();

@@ -7,12 +7,14 @@ import EditPuppyPage from '../EditPuppyPage/EditPuppyPage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import * as puppyAPI from '../../utils/puppiesService';
+import * as dogAPI from '../../utils/dogApi';
 import userService from '../../utils/userService';
 
 class App extends Component {
   state = {
     puppies: [],
-    user: userService.getUser()
+    user: userService.getUser(),
+    breeds: []
   };
 
   handleLogout = () => {
@@ -51,7 +53,10 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    this.getAllPuppies();
+    const breeds = await dogAPI.getAllBreeds();
+    this.setState({
+      breeds
+    })
   }
 
   render() {
@@ -91,12 +96,12 @@ class App extends Component {
             } />
             <Route exact path='/add' render={() =>
               userService.getUser() ?
-              <AddPuppyPage handleAddPuppy={this.handleAddPuppy} /> :
+              <AddPuppyPage handleAddPuppy={this.handleAddPuppy} breeds={this.state.breeds} /> :
               <Redirect to='/login'/>
             } />
             <Route exact path='/edit' render={({ history, location }) =>
               userService.getUser() ?
-              <EditPuppyPage handleUpdatePuppy={this.handleUpdatePuppy} location={location} /> :
+              <EditPuppyPage handleUpdatePuppy={this.handleUpdatePuppy} location={location} breeds={this.state.breeds} /> :
               <Redirect to='/login'/>
             } />
           </Switch>

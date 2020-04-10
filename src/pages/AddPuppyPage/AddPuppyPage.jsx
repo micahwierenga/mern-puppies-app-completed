@@ -6,25 +6,24 @@ class AddPuppyPage extends Component {
     formData: {
       name: '',
       breed: 'Mixed',
-      age: '0',
-      user: '5e8e800dbe3d1337db07602d'
+      age: '0'
     }
   };
 
   formRef = React.createRef();
-
-  handleSubmit = e => {
-    e.preventDefault();
-    // We will write the handleAddPuppy function in our App.js after this step...
-    this.props.handleAddPuppy(this.state.formData);
-  };
-
+  
   handleChange = e => {
     const formData = {...this.state.formData, [e.target.name]: e.target.value};
     this.setState({
       formData,
       invalidForm: !this.formRef.current.checkValidity()
     });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    // We will write the handleAddPuppy function in our App.js after this step...
+    this.props.handleAddPuppy(this.state.formData);
   };
 
   render() {
@@ -44,13 +43,10 @@ class AddPuppyPage extends Component {
           </div>
           <div className="form-group">
             <label>Pup's Breed (required)</label>
-            <input
-              className="form-control"
-              name="breed"
-              value={this.state.formData.breed}
-              onChange={this.handleChange}
-              required
-            />
+            <select className="form-control" name="breed" value={this.state.formData.breed} onChange={this.handleChange}>
+              <option>Choose a Breed</option>
+              {this.props.breeds.map((breed, idx) => <option value={breed.name}>{breed.name}</option>)}
+            </select>
           </div>
           <div className="form-group">
             <label>Pup's Age</label>

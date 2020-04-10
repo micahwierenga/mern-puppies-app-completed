@@ -41,13 +41,10 @@ class EditPuppyPage extends Component {
           </div>
           <div className="form-group">
             <label>Pup's Breed (required)</label>
-            <input
-              className="form-control"
-              name="breed"
-              value={this.state.formData.breed}
-              onChange={this.handleChange}
-              required
-            />
+            <select className="form-control" name="breed" value={this.state.formData.breed} onChange={this.handleChange}>
+              <option>Choose a Breed</option>
+              {this.props.breeds.map((breed, idx) => <option value={breed.name} selected={breed.name === this.state.formData.breed}>{breed.name}</option>)}
+            </select>
           </div>
           <div className="form-group">
             <label>Pup's Age</label>

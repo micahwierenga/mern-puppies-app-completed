@@ -37,7 +37,9 @@ class App extends Component {
 
   handleDeletePuppy= async id => {
     await puppyService.deleteOne(id);
-    this.getAllPuppies();
+    this.setState(state => ({
+      puppies: state.puppies.filter(p => p._id !== id)
+    }), () => this.props.history.push('/'));
   }
 
   handleUpdatePuppy = async updatedPupData => {

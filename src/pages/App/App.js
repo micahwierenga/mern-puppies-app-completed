@@ -19,7 +19,7 @@ class App extends Component {
 
   handleLogout = () => {
     userService.logout();
-    this.setState({ user: null });
+    this.setState({ user: null }, () => this.props.history.push('/'));
   }
 
   handleSignupOrLogin = () => {
@@ -37,9 +37,7 @@ class App extends Component {
 
   handleDeletePuppy= async id => {
     await puppyService.deleteOne(id);
-    this.setState(state => ({
-      puppies: state.puppies.filter(p => p._id !== id)
-    }), () => this.props.history.push('/'));
+    this.getAllPuppies();
   }
 
   handleUpdatePuppy = async updatedPupData => {

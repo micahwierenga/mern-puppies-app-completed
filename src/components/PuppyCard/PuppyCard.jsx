@@ -14,7 +14,7 @@ function PuppyCard({ puppy, handleDeletePuppy }) {
                     <dt>Age</dt>
                     <dd>{puppy.age}</dd>
                     <dt>Owner</dt>
-                    {/* <dd>{`${puppy.user.name.charAt(0).toUpperCase()}${puppy.user.name.slice(1)}`}</dd> */}
+                    <dd>{`${puppy.user.name.charAt(0).toUpperCase()}${puppy.user.name.slice(1)}`}</dd>
                 </dl>
             </div>
             <div className='panel-footer'>

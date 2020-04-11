@@ -12,8 +12,7 @@ module.exports = {
 // index
 async function index(req, res) {
     try{
-        const puppies = await Puppy.find({user: req.user._id});
-        // console.log('all puppies', puppies)
+        const puppies = await Puppy.find({user: req.user._id}).populate('user');
         res.status(200).json(puppies);
     }
     catch(err){
@@ -23,7 +22,6 @@ async function index(req, res) {
 
 // create
 async function create(req, res) {
-    // console.log('req.user:', req.user)
     req.body.user = req.user._id;
     try{
         const puppy = await Puppy.create(req.body);
@@ -71,7 +69,7 @@ async function deleteOne(req, res) {
 // indexAll
 async function indexAll(req, res) {
     try{
-        const puppiesByUser = await Puppy.find({}).populate('user');
+        const puppiesByUser = await Puppy.find({});
         res.status(200).json(puppiesByUser);
     }
     catch(err){

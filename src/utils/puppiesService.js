@@ -1,4 +1,3 @@
-import userService from './userService';
 import tokenService from './tokenService';
 
 const BASE_URL = '/api/puppies';
@@ -33,7 +32,6 @@ export function deleteOne(id) {
 }
 
 export function update(pup) {
-    pup.user = userService.getUser()._id;
     return fetch(`${BASE_URL}/${pup._id}`, {
         method: 'PUT',
         headers: {
